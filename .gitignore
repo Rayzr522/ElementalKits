@@ -1,0 +1,11 @@
+/bin/
+/target/
+.classpath
+.settings
+.metadata
+*.jardesc
+.idea
+.recommenders
+*.iml
+*.eml
+META-INF
