@@ -13,15 +13,15 @@ public class ElementalKits extends JavaPlugin {
 	public void onEnable() {
 
 		logger = getLogger();
-		
+
 		logger.info(versionString() + " enabled!");
 
 	}
 
 	public void onDisable() {
-		
+
 		logger.info(versionString() + " disabled!");
-		
+
 	}
 
 	public String versionString() {
