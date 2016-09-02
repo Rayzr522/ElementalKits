@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.rayzr522.elementalkits.kits.KitInferno;
 import com.rayzr522.elementalkits.utils.ConfigManager;
 import com.rayzr522.elementalkits.utils.Msg;
 
@@ -25,8 +26,8 @@ public class ElementalKits extends JavaPlugin {
 
 		kits.addKit(new KitInferno(this));
 
-		// getCommand("ekit").setExecutor(new <commandExecutor>());
-		// getCommand("elementalkits").setExecutor(new <commandExecutor>());
+		getCommand("ekit").setExecutor(new CommandListener(this));
+		getCommand("elementalkits").setExecutor(new CommandListener(this));
 
 		logger.info(versionString() + " enabled!");
 
