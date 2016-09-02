@@ -5,5 +5,7 @@ description: An elemental kits plugin for Minecraft
 author: [Rayzr522,EndureBlackout]
 commands:
   ekit:
-    description: Main ElementalKits command
+    description: ElementalKits selector
     usage: "/ekit [kit]"
+  elementalkits:
+    description: Main ElementalKits command
