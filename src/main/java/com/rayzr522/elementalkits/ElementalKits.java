@@ -13,18 +13,16 @@ public class ElementalKits extends JavaPlugin {
 
 	private Logger			logger;
 	private ConfigManager	cm;
-	private Kits			kits;
 
 	@Override
 	public void onEnable() {
 
 		logger = getLogger();
 		cm = new ConfigManager(this);
-		kits = new Kits(this);
 
 		load();
 
-		kits.addKit(new KitInferno(this));
+		KitInferno.ID = Kits.addKit(new KitInferno(this));
 
 		CommandListener listener = new CommandListener(this);
 		getCommand("ekit").setExecutor(listener);

@@ -7,15 +7,16 @@ import com.rayzr522.elementalkits.kits.Kit;
 
 public class Kits {
 
-	private ElementalKits			plugin;
-	private HashMap<Integer, Kit>	kits	= new HashMap<>();
+	private static HashMap<Integer, Kit> kits = new HashMap<>();
 
-	public Kits(ElementalKits plugin) {
-		this.plugin = plugin;
+	public static int addKit(Kit kit) {
+		int id = kits.size();
+		kits.put(id, kit);
+		return id;
 	}
 
-	public void addKit(Kit kit) {
-		kits.put(kits.size(), kit);
+	public static Kit getKit(int id) {
+		return kits.get(id);
 	}
 
 }

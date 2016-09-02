@@ -18,6 +18,8 @@ import com.rayzr522.elementalkits.utils.item.ItemUtils;
 
 public class KitInferno extends Kit {
 
+	public static int				ID			= -1;
+
 	private HashMap<UUID, Long>		cooldowns	= new HashMap<>();
 	private static final ItemStack	bone		= ItemUtils.makeItem("bone, named &6Fire &cWand");
 	public static final long		cooldown	= 6000;
@@ -42,21 +44,21 @@ public class KitInferno extends Kit {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 
-		System.out.println("STuff1");
 		if (!e.getAction().toString().startsWith("LEFT_CLICK")) { return; }
-		System.out.println("STuff2");
+
+		Player p = e.getPlayer();
+		if (!p.getInventory().getItemInMainHand().equals(bone)) { return; }
 
 		long now = System.currentTimeMillis();
-		Player p = e.getPlayer();
 		long last = lastTime(p) == -1 ? now - cooldown : lastTime(p);
 
 		if (now - last < cooldown) {
-			p.playSound(p.getLocation(), Sound.ENCHANT_THORNS_HIT, 1.0f, 1.0f);
+			p.playSound(p.getLocation(), Sound.BLOCK_CLOTH_BREAK, 1.0f, 1.0f);
 			return;
 		}
 
 		cooldowns.put(p.getUniqueId(), now);
-		p.getWorld().spawnEntity(p.getEyeLocation(), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection());
+		p.getWorld().spawnEntity(p.getEyeLocation().add(p.getLocation().getDirection()), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection());
 
 	}
 
