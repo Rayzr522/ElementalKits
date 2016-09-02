@@ -14,7 +14,7 @@ import com.rayzr522.elementalkits.utils.TextUtils;
 
 public class ItemUtils {
 
-	private static List<ParseCommand>	parsers	= Arrays.asList(new ParseEnchantment(), new ParseName());
+	private static List<ParseCommand>	parsers	= Arrays.asList(new ParseEnchantment(), new ParseName(), new ParseLore());
 
 	public static final ItemStack		ERROR	= new ItemStack(Material.BARRIER, 0);
 

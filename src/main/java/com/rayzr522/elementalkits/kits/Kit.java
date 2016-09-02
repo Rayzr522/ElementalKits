@@ -10,7 +10,7 @@ import com.rayzr522.elementalkits.ElementalKits;
 
 public abstract class Kit implements Listener {
 
-	private ElementalKits plugin;
+	protected ElementalKits plugin;
 
 	public Kit(ElementalKits plugin) {
 
