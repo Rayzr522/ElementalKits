@@ -21,7 +21,12 @@ public class CommandListener implements CommandExecutor {
 			}
 			
 			if(cmd.getName().equalsIgnoreCase("elementalkits")) {
-				
+				if(args.length == 1) {
+					if(args[0].equalsIgnoreCase("reload")) {
+						plugin.reloadConfig();
+						plugin.load();
+					}
+				}
 			}
 		}
 		return false;

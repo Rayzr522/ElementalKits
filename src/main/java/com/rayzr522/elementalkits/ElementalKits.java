@@ -21,8 +21,8 @@ public class ElementalKits extends JavaPlugin {
 
 		load();
 
-		// getCommand("ekit").setExecutor(new <commandExecutor>());
-		// getCommand("elementalkits").setExecutor(new <commandExecutor>());
+		getCommand("ekit").setExecutor(new CommandListener(this));
+		getCommand("elementalkits").setExecutor(new CommandListener(this));
 
 		logger.info(versionString() + " enabled!");
 
