@@ -26,8 +26,9 @@ public class ElementalKits extends JavaPlugin {
 
 		kits.addKit(new KitInferno(this));
 
-		getCommand("ekit").setExecutor(new CommandListener(this));
-		getCommand("elementalkits").setExecutor(new CommandListener(this));
+		CommandListener listener = new CommandListener(this);
+		getCommand("ekit").setExecutor(listener);
+		getCommand("elementalkits").setExecutor(listener);
 
 		logger.info(versionString() + " enabled!");
 

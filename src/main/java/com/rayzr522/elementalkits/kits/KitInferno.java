@@ -42,7 +42,9 @@ public class KitInferno extends Kit {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 
+		System.out.println("STuff1");
 		if (!e.getAction().toString().startsWith("LEFT_CLICK")) { return; }
+		System.out.println("STuff2");
 
 		long now = System.currentTimeMillis();
 		Player p = e.getPlayer();
