@@ -1,17 +1,13 @@
 
 package com.rayzr522.elementalkits;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-
-import com.rayzr522.elementalkits.utils.TextUtils;
 
 public class Players {
 
@@ -68,54 +64,11 @@ public class Players {
 		players.put(id, new PlayerData(id, null));
 	}
 
-	public static PlayerData get(Player p, String name) {
-		return get(p.getUniqueId(), name);
-	}
-
-	public static PlayerData get(UUID id, String name) {
-		List<PlayerData> homeList = get(id);
-		for (PlayerData home : homeList) {
-			if (TextUtils.enumFormat(name).equals(TextUtils.enumFormat(home.getName()))) { return home; }
+	public static PlayerData get(String name) {
+		for (Entry<UUID, PlayerData> entry : players.entrySet()) {
+			if (entry.getValue().getName().equalsIgnoreCase(name)) { return entry.getValue(); }
 		}
 		return null;
-	}
-
-	public static void set(Player p, String name) {
-
-		List<PlayerData> homeList = get(p);
-		PlayerData home = get(p, name);
-
-		if (home == null) {
-			home = new PlayerData(p, name);
-		} else {
-			homeList.remove(home);
-			home.setLocation(p.getLocation());
-		}
-
-		homeList.add(home);
-		players.put(p.getUniqueId(), homeList);
-
-	}
-
-	public static boolean del(UUID id, String name) {
-
-		PlayerData home = get(id, name);
-		if (home == null) { return false; }
-		return del(id, home);
-
-	}
-
-	public static boolean del(UUID id, PlayerData home) {
-
-		List<PlayerData> homeList = get(id);
-
-		if (homeList.remove(home)) {
-			players.put(id, homeList);
-			return true;
-		}
-
-		return false;
-
 	}
 
 }
