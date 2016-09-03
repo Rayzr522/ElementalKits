@@ -57,4 +57,12 @@ public class Players {
 		players.put(id, 0);
 	}
 
+	public static void set(Player p, int id) {
+		set(p.getUniqueId(), id);
+	}
+
+	public static void set(UUID uid, int id) {
+		players.put(uid, id);
+	}
+
 }

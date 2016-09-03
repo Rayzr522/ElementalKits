@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.rayzr522.elementalkits.ElementalKits;
+import com.rayzr522.elementalkits.Players;
 import com.rayzr522.elementalkits.utils.item.ItemUtils;
 
 public class KitInferno extends Kit {
@@ -44,7 +45,7 @@ public class KitInferno extends Kit {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 
-		if (!e.getAction().toString().startsWith("LEFT_CLICK")) { return; }
+		if (!e.getAction().toString().startsWith("LEFT_CLICK") || Players.get(e.getPlayer()) != ID) { return; }
 
 		Player p = e.getPlayer();
 		if (!p.getInventory().getItemInMainHand().equals(bone)) { return; }

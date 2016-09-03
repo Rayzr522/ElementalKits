@@ -47,12 +47,14 @@ public class CommandListener implements CommandExecutor {
 
 		if (args.length == 1) {
 
-			Kit kit = Kits.getKit(Integer.parseInt(args[0]));
+			int id = Integer.parseInt(args[0]);
+			Kit kit = Kits.getKit(id);
 			if (kit == null) {
 				p.sendMessage(ChatColor.RED + "That kit does not exist!");
 				return;
 			}
 
+			Players.set(p, id);
 			p.getInventory().addItem((ItemStack[]) kit.getItems().toArray());
 
 		}

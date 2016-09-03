@@ -10,7 +10,7 @@ public class Kits {
 	private static HashMap<Integer, Kit> kits = new HashMap<>();
 
 	public static int addKit(Kit kit) {
-		int id = kits.size();
+		int id = kits.size() + 1;
 		kits.put(id, kit);
 		return id;
 	}
