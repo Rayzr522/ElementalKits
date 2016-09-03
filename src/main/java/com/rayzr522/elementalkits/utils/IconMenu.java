@@ -18,22 +18,23 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class IconMenu implements Listener {
 
 	private String					name;
 	private int						size;
 	private OptionClickEventHandler	handler;
-	private Plugin					plugin;
+	private JavaPlugin				plugin;
 	private Player					player;
 
 	private String[]				optionNames;
 	private ItemStack[]				optionIcons;
 
-	public IconMenu(String name, int size, OptionClickEventHandler handler, Plugin plugin) {
+	public IconMenu(String name, int size, OptionClickEventHandler optionClickEventHandler, JavaPlugin plugin) {
 		this.name = name;
 		this.size = size;
-		this.handler = handler;
+		this.handler = optionClickEventHandler;
 		this.plugin = plugin;
 		this.optionNames = new String[size];
 		this.optionIcons = new ItemStack[size];
@@ -121,11 +122,6 @@ public class IconMenu implements Listener {
 				}
 			}
 		}
-	}
-
-	public interface OptionClickEventHandler {
-
-		public void onOptionClick(OptionClickEvent event);
 	}
 
 	public class OptionClickEvent {
