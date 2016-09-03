@@ -24,6 +24,11 @@ public class Kits {
 
 	public static void set(Player p, int id) {
 
+		Kit current = getKit(Players.get(p));
+		if (current != null) {
+			current.onKitRemove(p);
+		}
+
 		Kit kit = getKit(id);
 		if (kit != null) {
 			p.getInventory().addItem((ItemStack[]) kit.getItems().toArray());

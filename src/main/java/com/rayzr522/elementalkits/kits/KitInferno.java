@@ -4,8 +4,10 @@ package com.rayzr522.elementalkits.kits;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -18,6 +20,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import com.rayzr522.elementalkits.ElementalKits;
 import com.rayzr522.elementalkits.Players;
@@ -64,8 +67,10 @@ public class KitInferno extends Kit {
 			return;
 		}
 
+		Vector loc = p.getTargetBlock((Set<Material>) null, 1).getType() == Material.AIR ? p.getLocation().getDirection().multiply(2.0) : p.getLocation().getDirection();
+
 		cooldowns.put(p.getUniqueId(), now);
-		p.getWorld().spawnEntity(p.getEyeLocation().add(p.getLocation().getDirection()), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection());
+		p.getWorld().spawnEntity(p.getEyeLocation().add(loc), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection().multiply(2.5));
 
 	}
 
@@ -116,7 +121,8 @@ public class KitInferno extends Kit {
 
 	@Override
 	public void onKitRemove(Player p) {
-		p.getInventory().removeItem(bone);
+		System.out.println("Removing bone!");
+		p.getInventory().remove(bone);
 	}
 
 }
