@@ -5,7 +5,9 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.rayzr522.elementalkits.kits.KitFrost;
 import com.rayzr522.elementalkits.kits.KitInferno;
+import com.rayzr522.elementalkits.kits.KitVortex;
 import com.rayzr522.elementalkits.utils.ConfigManager;
 import com.rayzr522.elementalkits.utils.Msg;
 
@@ -23,6 +25,8 @@ public class ElementalKits extends JavaPlugin {
 		load();
 
 		KitInferno.ID = Kits.addKit(new KitInferno(this));
+		KitVortex.ID = Kits.addKit(new KitVortex(this));
+		KitFrost.ID = Kits.addKit(new KitFrost(this));
 
 		CommandListener listener = new CommandListener(this);
 		getCommand("ekit").setExecutor(listener);
