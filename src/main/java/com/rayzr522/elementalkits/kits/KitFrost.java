@@ -55,4 +55,8 @@ public class KitFrost extends Kit {
 
 	}
 
+	@Override
+	public void onKitRemove(Player p) {
+	}
+
 }

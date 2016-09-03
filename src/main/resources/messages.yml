@@ -1,0 +1,10 @@
+usage:
+  ekit: "&e/ekit"
+  elementalkits: "&e/elementalkits [reload]"
+no-permission: "&cYou don't have permission to do that!"
+plugin-info: "&6This server is running &e{0}&6"
+no-class: "&cYou don't have a kit selected. Do &6[[usage.ekit]]&c to select one."
+only-players: "&cOnly players can use that commmand"
+kit-removed: "&6Kit removed"
+already-selected: "&cYou already have that kit selected"
+kit-selected: "&6Selected kit &e{0}&6"

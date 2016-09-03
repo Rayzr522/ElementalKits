@@ -55,4 +55,8 @@ public class KitVortex extends Kit {
 
 	}
 
+	@Override
+	public void onKitRemove(Player p) {
+	}
+
 }

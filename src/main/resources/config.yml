@@ -1,3 +1,22 @@
-permission:
+permissions:
   select-kit: ElementalKits.select
   manage: ElementalKits.admin
+descriptions:
+  inferno:
+  - "The inferno class contains a wand that"
+  - "summons a powerful fireball, capable of"
+  - "leveling enemies."
+  - ""
+  - "&9Fire wand cooldown: &b6 seconds"
+  frost:
+  - "The frost class gives the player the"
+  - "ability to freeze enemies with just a"
+  - "single touch."
+  - ""
+  - "&9Chance of slowing: &b1/3"
+  vortex:
+  - "The vortex class are known for their"
+  - "ability to poison their targets just"
+  - "by touching them."
+  - ""
+  - "&9Chance of poisoning: &b1/3"

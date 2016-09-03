@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -67,43 +68,55 @@ public class KitInferno extends Kit {
 		p.getWorld().spawnEntity(p.getEyeLocation().add(p.getLocation().getDirection()), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection());
 
 	}
-	
+
 	@EventHandler
 	public void onPlayerSpawn(PlayerRespawnEvent e) {
 		Player p = e.getPlayer();
-		if(Players.get(p) == ID && !(p.getInventory().contains(bone))) {
+		if (Players.get(p) == ID && !(p.getInventory().contains(bone))) {
 			p.getInventory().addItem(bone);
 		}
 	}
-	
+
 	@EventHandler
 	public void onInvInteract(InventoryClickEvent e) {
-		if(e.getInventory().getType() == InventoryType.CRAFTING || e.getInventory().getType() == InventoryType.PLAYER) {
+		if (e.getInventory().getType() == InventoryType.CRAFTING || e.getInventory().getType() == InventoryType.PLAYER) {
 			return;
 		} else {
-			if(e.getCurrentItem().equals(bone)) {
+			if (e.getCurrentItem().equals(bone)) {
 				e.setCancelled(true);
 			}
 		}
 	}
-	
+
 	@EventHandler
 	public void onPlayerDrop(PlayerDropItemEvent e) {
 		ItemStack item = e.getItemDrop().getItemStack();
-		
-		if(item.equals(bone)) {
+
+		if (item.equals(bone)) {
 			e.setCancelled(true);
 		}
 	}
-	
+
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent event) {
-		for(ItemStack item : event.getDrops()) {
-			if(item.equals(bone)) {
+		for (ItemStack item : event.getDrops()) {
+			if (item.equals(bone)) {
 				event.getDrops().remove(bone);
 			}
 		}
 
+	}
+
+	@EventHandler
+	public void onPreCraft(CraftItemEvent e) {
+		if (e.getInventory().contains(bone)) {
+			e.setCancelled(true);
+		}
+	}
+
+	@Override
+	public void onKitRemove(Player p) {
+		p.getInventory().removeItem(bone);
 	}
 
 }

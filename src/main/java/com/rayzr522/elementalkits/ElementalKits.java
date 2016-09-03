@@ -28,9 +28,9 @@ public class ElementalKits extends JavaPlugin {
 		KitInferno.ID = Kits.addKit(new KitInferno(this));
 		KitVortex.ID = Kits.addKit(new KitVortex(this));
 		KitFrost.ID = Kits.addKit(new KitFrost(this));
-		
+
 		Bukkit.getPluginManager().registerEvents(new MainListener(this), this);
-		
+
 		CommandListener listener = new CommandListener(this);
 		getCommand("ekit").setExecutor(listener);
 		getCommand("elementalkits").setExecutor(listener);
@@ -41,6 +41,8 @@ public class ElementalKits extends JavaPlugin {
 
 	public void onDisable() {
 
+		save();
+
 		logger.info(versionString() + " disabled!");
 
 	}
@@ -50,6 +52,12 @@ public class ElementalKits extends JavaPlugin {
 		Msg.load(cm.getOrCreate("messages.yml"));
 		Players.load(cm.getOrCreate("players.yml"));
 		Config.load(this);
+
+	}
+
+	public void save() {
+
+		cm.saveConfig("players.yml", Players.save());
 
 	}
 

@@ -64,10 +64,14 @@ public class IconMenu implements Listener {
 		return this;
 	}
 
+	public IconMenu setOption(int y, int x, ItemStack icon) {
+		return setOption(x + y * 9, icon);
+	}
+
 	public IconMenu setOptions(int[] positions, ItemStack icon) {
 		for (int i : positions) {
 			optionNames[i] = icon.getItemMeta().getDisplayName();
-			optionIcons[0] = icon;
+			optionIcons[i] = icon;
 		}
 		return this;
 	}
