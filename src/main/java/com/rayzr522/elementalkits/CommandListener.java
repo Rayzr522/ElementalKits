@@ -21,7 +21,8 @@ public class CommandListener implements CommandExecutor {
 	private static final ItemStack	CLASS_INFERNO	= ItemUtils.makeItem("fireball, named &eClass: &cInferno, with lore &9Look at the book below for a description");
 	private static final ItemStack	CLASS_FROST		= ItemUtils.makeItem("ice, named &eClass: &bFrost, with lore &9Look at the book below for a description");
 	private static final ItemStack	CLASS_VORTEX	= ItemUtils.makeItem("emerald, named &eClass: &aVortex, with lore &9Look at the book below for a description");
-
+	private static final ItemStack  CLASS_NONE      = ItemUtils.makeItem("redstone block, named &cRemove Class");
+	
 	public CommandListener(ElementalKits instance) {
 		this.plugin = instance;
 		menu = new IconMenu(ChatColor.BLUE + "Select a Kit", 54, this::itemClick, instance);
@@ -37,6 +38,8 @@ public class CommandListener implements CommandExecutor {
 
 		} else if (event.getItem() == CLASS_VORTEX) {
 
+		} else if (event.getItem() == CLASS_NONE) {
+		
 		} else { // ONLY if they clicked on none of the buttons
 			event.setWillClose(false);
 		}
