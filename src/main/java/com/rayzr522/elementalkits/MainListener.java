@@ -20,7 +20,11 @@ public class MainListener implements Listener {
 			Player p1 = (Player) e.getDamager();
 			
 			if(Players.get(p) == Players.get(p1)) {
-				e.setCancelled(true);
+				if(Players.get(p) == 0 && Players.get(p1) == 0) {
+					return;
+				} else {
+					e.setCancelled(true);
+				}
 			}
 		}
 	}
