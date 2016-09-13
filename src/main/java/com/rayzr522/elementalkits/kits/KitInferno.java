@@ -3,7 +3,6 @@ package com.rayzr522.elementalkits.kits;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +10,7 @@ import java.util.UUID;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -71,7 +71,12 @@ public class KitInferno extends Kit {
 		Vector loc = p.getTargetBlock((Set<Material>) null, 1).getType() == Material.AIR ? p.getLocation().getDirection().multiply(2.0) : p.getLocation().getDirection();
 
 		cooldowns.put(p.getUniqueId(), now);
-		p.getWorld().spawnEntity(p.getEyeLocation().add(loc), EntityType.FIREBALL).setVelocity(p.getLocation().getDirection().multiply(2.5));
+
+		Fireball entity = (Fireball) p.getWorld().spawnEntity(p.getEyeLocation().add(loc), EntityType.FIREBALL);
+		entity.setShooter(p);
+		entity.setYield(1.5f);
+		entity.setIsIncendiary(true);
+		entity.setVelocity(p.getLocation().getDirection().multiply(2.5));
 
 	}
 
@@ -96,29 +101,21 @@ public class KitInferno extends Kit {
 
 	@EventHandler
 	public void onPlayerDrop(PlayerDropItemEvent e) {
-		ItemStack item = e.getItemDrop().getItemStack();
-
-		if (item.equals(bone)) {
+		if (e.getItemDrop().getItemStack().equals(bone)) {
 			e.setCancelled(true);
 		}
 	}
 
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent event) {
-		Iterator<ItemStack> iterator = event.getDrops().iterator();
-
-		if (iterator.hasNext()) {
-			for (ItemStack item = iterator.next(); iterator.hasNext(); item = iterator.next()) {
-				if (item.equals(bone)) {
-					event.getDrops().remove(bone);
-				}
-			}
+		while (event.getDrops().remove(bone)) {
+			// This just loops until all bone wands are removed
 		}
-
 	}
 
 	@EventHandler
 	public void onPreCraft(CraftItemEvent e) {
+		// No bonemeal for you!
 		if (e.getInventory().contains(bone)) {
 			e.setCancelled(true);
 		}
@@ -126,7 +123,7 @@ public class KitInferno extends Kit {
 
 	@Override
 	public void onKitRemove(Player p) {
-		System.out.println("Removing bone!");
+		// Remove the bone
 		p.getInventory().remove(bone);
 	}
 
