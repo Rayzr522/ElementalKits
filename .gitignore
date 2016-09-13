@@ -1,6 +1,7 @@
 /bin/
 /target/
 .classpath
+.project
 .settings
 .metadata
 *.jardesc
@@ -8,4 +9,5 @@
 .recommenders
 *.iml
 *.eml
+.DS_Store
 META-INF

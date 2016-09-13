@@ -3,6 +3,7 @@ package com.rayzr522.elementalkits.kits;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -104,9 +105,13 @@ public class KitInferno extends Kit {
 
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent event) {
-		for (ItemStack item : event.getDrops()) {
-			if (item.equals(bone)) {
-				event.getDrops().remove(bone);
+		Iterator<ItemStack> iterator = event.getDrops().iterator();
+
+		if (iterator.hasNext()) {
+			for (ItemStack item = iterator.next(); iterator.hasNext(); item = iterator.next()) {
+				if (item.equals(bone)) {
+					event.getDrops().remove(bone);
+				}
 			}
 		}
 
