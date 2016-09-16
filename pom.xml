@@ -8,7 +8,7 @@
 	<description>An elemental kits plugin for Minecraft</description>
 	<repositories>
 		<repository>
-			<id>spigot-repo</id>
+			<id>spigot-snapshots</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 	</repositories>
