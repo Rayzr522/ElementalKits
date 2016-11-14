@@ -18,45 +18,48 @@ import com.rayzr522.elementalkits.Players;
 
 public class KitVortex extends Kit {
 
-	public static int	ID		= -1;
+    public static int ID     = -1;
 
-	private Random		random	= new Random();
+    private Random    random = new Random();
 
-	public KitVortex(ElementalKits plugin) {
-		super(plugin);
-	}
+    public KitVortex(ElementalKits plugin) {
+        super(plugin);
+    }
 
-	@Override
-	public void init() {
-	}
+    @Override
+    public void init() {
+    }
 
-	@Override
-	public List<ItemStack> getItems() {
-		return Arrays.asList();
-	}
+    @Override
+    public List<ItemStack> getItems() {
+        return Arrays.asList();
+    }
 
-	@EventHandler
-	public void onEntityDamaged(EntityDamageByEntityEvent e) {
+    @EventHandler
+    public void onEntityDamaged(EntityDamageByEntityEvent e) {
 
-		if (e.getDamager().getType() != EntityType.PLAYER || e.getEntityType() != EntityType.PLAYER) { return; }
+        if (e.getDamager().getType() != EntityType.PLAYER || e.getEntityType() != EntityType.PLAYER) {
+            return;
+        }
 
-		Player p = (Player) e.getDamager();
+        Player p = (Player) e.getDamager();
 
-		if (Players.get(p) != ID) { return; }
+        if (Players.get(p) != ID) {
+            return;
+        }
 
-		Player target = (Player) e.getEntity();
-		
-		if (random.nextGaussian() <= 0.33) {
-			
-			target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 0));
-			
-		}
+        Player target = (Player) e.getEntity();
 
+        if (random.nextGaussian() <= 0.33) {
 
-	}
+            target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 0));
 
-	@Override
-	public void onKitRemove(Player p) {
-	}
+        }
+
+    }
+
+    @Override
+    public void onKitRemove(Player p) {
+    }
 
 }

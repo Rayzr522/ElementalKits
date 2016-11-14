@@ -12,20 +12,20 @@ import com.rayzr522.elementalkits.ElementalKits;
 
 public abstract class Kit implements Listener {
 
-	protected ElementalKits plugin;
+    protected ElementalKits plugin;
 
-	public Kit(ElementalKits plugin) {
+    public Kit(ElementalKits plugin) {
 
-		this.plugin = plugin;
-		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
-		init();
+        this.plugin = plugin;
+        Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+        init();
 
-	}
+    }
 
-	public abstract void init();
+    public abstract void init();
 
-	public abstract List<ItemStack> getItems();
+    public abstract List<ItemStack> getItems();
 
-	public abstract void onKitRemove(Player p);
+    public abstract void onKitRemove(Player p);
 
 }

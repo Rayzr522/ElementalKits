@@ -14,57 +14,57 @@ import com.rayzr522.elementalkits.utils.Msg;
 
 public class ElementalKits extends JavaPlugin {
 
-	private Logger			logger;
-	private ConfigManager	cm;
+    private Logger        logger;
+    private ConfigManager cm;
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		logger = getLogger();
-		cm = new ConfigManager(this);
+        logger = getLogger();
+        cm = new ConfigManager(this);
 
-		load();
+        load();
 
-		KitInferno.ID = Kits.addKit(new KitInferno(this));
-		KitVortex.ID = Kits.addKit(new KitVortex(this));
-		KitFrost.ID = Kits.addKit(new KitFrost(this));
+        KitInferno.ID = Kits.addKit(new KitInferno(this));
+        KitVortex.ID = Kits.addKit(new KitVortex(this));
+        KitFrost.ID = Kits.addKit(new KitFrost(this));
 
-		Bukkit.getPluginManager().registerEvents(new MainListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new MainListener(this), this);
 
-		CommandListener listener = new CommandListener(this);
-		getCommand("ekit").setExecutor(listener);
-		getCommand("elementalkits").setExecutor(listener);
+        CommandListener listener = new CommandListener(this);
+        getCommand("ekit").setExecutor(listener);
+        getCommand("elementalkits").setExecutor(listener);
 
-		logger.info(versionString() + " enabled!");
+        logger.info(versionString() + " enabled!");
 
-	}
+    }
 
-	public void onDisable() {
+    public void onDisable() {
 
-		save();
+        save();
 
-		logger.info(versionString() + " disabled!");
+        logger.info(versionString() + " disabled!");
 
-	}
+    }
 
-	public void load() {
+    public void load() {
 
-		Msg.load(cm.getOrCreate("messages.yml"));
-		Players.load(cm.getOrCreate("players.yml"));
-		Config.load(this);
+        Msg.load(cm.getOrCreate("messages.yml"));
+        Players.load(cm.getOrCreate("players.yml"));
+        Config.load(this);
 
-	}
+    }
 
-	public void save() {
+    public void save() {
 
-		cm.saveConfig("players.yml", Players.save());
+        cm.saveConfig("players.yml", Players.save());
 
-	}
+    }
 
-	public String versionString() {
+    public String versionString() {
 
-		return getName() + " v" + getDescription().getVersion();
+        return getName() + " v" + getDescription().getVersion();
 
-	}
+    }
 
 }

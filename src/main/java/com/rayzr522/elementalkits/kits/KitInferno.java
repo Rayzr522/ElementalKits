@@ -29,102 +29,106 @@ import com.rayzr522.elementalkits.utils.item.ItemUtils;
 
 public class KitInferno extends Kit {
 
-	public static int				ID			= -1;
+    public static int              ID        = -1;
 
-	private HashMap<UUID, Long>		cooldowns	= new HashMap<>();
-	private static final ItemStack	bone		= ItemUtils.makeItem("bone, named &6Fire &cWand");
-	public static final long		cooldown	= 6000;
+    private HashMap<UUID, Long>    cooldowns = new HashMap<>();
+    private static final ItemStack bone      = ItemUtils.makeItem("bone, named &6Fire &cWand");
+    public static final long       cooldown  = 6000;
 
-	public KitInferno(ElementalKits plugin) {
-		super(plugin);
-	}
+    public KitInferno(ElementalKits plugin) {
+        super(plugin);
+    }
 
-	@Override
-	public void init() {
-	}
+    @Override
+    public void init() {
+    }
 
-	@Override
-	public List<ItemStack> getItems() {
-		return Arrays.asList(bone);
-	}
+    @Override
+    public List<ItemStack> getItems() {
+        return Arrays.asList(bone);
+    }
 
-	private long lastTime(Player p) {
-		return cooldowns.containsKey(p.getUniqueId()) ? cooldowns.get(p.getUniqueId()) : -1;
-	}
+    private long lastTime(Player p) {
+        return cooldowns.containsKey(p.getUniqueId()) ? cooldowns.get(p.getUniqueId()) : -1;
+    }
 
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent e) {
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent e) {
 
-		if (!e.getAction().toString().startsWith("LEFT_CLICK") || Players.get(e.getPlayer()) != ID) { return; }
+        if (!e.getAction().toString().startsWith("LEFT_CLICK") || Players.get(e.getPlayer()) != ID) {
+            return;
+        }
 
-		Player p = e.getPlayer();
-		if (!p.getInventory().getItemInMainHand().equals(bone)) { return; }
+        Player p = e.getPlayer();
+        if (!p.getInventory().getItemInMainHand().equals(bone)) {
+            return;
+        }
 
-		long now = System.currentTimeMillis();
-		long last = lastTime(p) == -1 ? now - cooldown : lastTime(p);
+        long now = System.currentTimeMillis();
+        long last = lastTime(p) == -1 ? now - cooldown : lastTime(p);
 
-		if (now - last < cooldown) {
-			p.playSound(p.getLocation(), Sound.BLOCK_CLOTH_BREAK, 1.0f, 1.0f);
-			return;
-		}
+        if (now - last < cooldown) {
+            p.playSound(p.getLocation(), Sound.BLOCK_CLOTH_BREAK, 1.0f, 1.0f);
+            return;
+        }
 
-		Vector loc = p.getTargetBlock((Set<Material>) null, 1).getType() == Material.AIR ? p.getLocation().getDirection().multiply(2.0) : p.getLocation().getDirection();
+        Vector loc = p.getTargetBlock((Set<Material>) null, 1).getType() == Material.AIR ? p.getLocation().getDirection().multiply(2.0) : p.getLocation().getDirection();
 
-		cooldowns.put(p.getUniqueId(), now);
+        cooldowns.put(p.getUniqueId(), now);
 
-		Fireball entity = (Fireball) p.getWorld().spawnEntity(p.getEyeLocation().add(loc), EntityType.FIREBALL);
-		entity.setShooter(p);
-		entity.setYield(1.5f);
-		entity.setIsIncendiary(true);
-		entity.setVelocity(p.getLocation().getDirection().multiply(2.5));
+        Fireball entity = (Fireball) p.getWorld().spawnEntity(p.getEyeLocation().add(loc), EntityType.FIREBALL);
+        entity.setShooter(p);
+        entity.setYield(1.5f);
+        entity.setIsIncendiary(true);
+        entity.setVelocity(p.getLocation().getDirection().multiply(2.5));
 
-	}
+    }
 
-	@EventHandler
-	public void onPlayerSpawn(PlayerRespawnEvent e) {
-		Player p = e.getPlayer();
-		if (Players.get(p) == ID && !(p.getInventory().contains(bone))) {
-			p.getInventory().addItem(bone);
-		}
-	}
+    @EventHandler
+    public void onPlayerSpawn(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        if (Players.get(p) == ID && !(p.getInventory().contains(bone))) {
+            p.getInventory().addItem(bone);
+        }
+    }
 
-	@EventHandler
-	public void onInvInteract(InventoryClickEvent e) {
-		if (e.getInventory().getType() == InventoryType.CRAFTING || e.getInventory().getType() == InventoryType.PLAYER) {
-			return;
-		} else {
-			if (e.getCurrentItem().equals(bone)) {
-				e.setCancelled(true);
-			}
-		}
-	}
+    @EventHandler
+    public void onInvInteract(InventoryClickEvent e) {
+        if (e.getInventory().getType() == InventoryType.CRAFTING || e.getInventory().getType() == InventoryType.PLAYER) {
+            return;
+        } else {
+            if (e.getCurrentItem().equals(bone)) {
+                e.setCancelled(true);
+            }
+        }
+    }
 
-	@EventHandler
-	public void onPlayerDrop(PlayerDropItemEvent e) {
-		if (e.getItemDrop().getItemStack().equals(bone)) {
-			e.setCancelled(true);
-		}
-	}
+    @EventHandler
+    public void onPlayerDrop(PlayerDropItemEvent e) {
+        if (e.getItemDrop().getItemStack().equals(bone)) {
+            e.setCancelled(true);
+        }
+    }
 
-	@EventHandler
-	public void onDeathEvent(PlayerDeathEvent event) {
-		while (event.getDrops().remove(bone)) {
-			// This just loops until all bone wands are removed
-		}
-	}
+    @EventHandler
+    public void onDeathEvent(PlayerDeathEvent event) {
+        while (event.getDrops().remove(bone)) {
+            // This just loops until all bone wands are removed
+        }
+    }
 
-	@EventHandler
-	public void onPreCraft(CraftItemEvent e) {
-		// No bonemeal for you!
-		if (e.getInventory().contains(bone)) {
-			e.setCancelled(true);
-		}
-	}
+    @EventHandler
+    public void onPreCraft(CraftItemEvent e) {
+        // No bonemeal for you!
+        if (e.getInventory().contains(bone)) {
+            e.setCancelled(true);
+        }
+    }
 
-	@Override
-	public void onKitRemove(Player p) {
-		// Remove the bone
-		p.getInventory().remove(bone);
-	}
+    @Override
+    public void onKitRemove(Player p) {
+        // Remove the bone
+        p.getInventory().remove(bone);
+    }
 
 }

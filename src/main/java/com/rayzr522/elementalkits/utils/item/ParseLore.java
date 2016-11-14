@@ -15,29 +15,29 @@ import com.rayzr522.elementalkits.utils.TextUtils;
  */
 public class ParseLore extends ParseCommand {
 
-	private List<String> descriptors = Arrays.asList("with lore", "lore");
+    private List<String> descriptors = Arrays.asList("with lore", "lore");
 
-	public List<String> getDescriptors() {
-		return descriptors;
-	}
+    public List<String> getDescriptors() {
+        return descriptors;
+    }
 
-	public ItemStack apply(ItemStack base, String args) {
+    public ItemStack apply(ItemStack base, String args) {
 
-		String[] lines = args.split("\n");
+        String[] lines = args.split("\n");
 
-		ItemMeta meta = base.getItemMeta();
-		List<String> lore = meta.hasLore() ? meta.getLore() : ListUtils.empty();
+        ItemMeta meta = base.getItemMeta();
+        List<String> lore = meta.hasLore() ? meta.getLore() : ListUtils.empty();
 
-		for (String line : lines) {
+        for (String line : lines) {
 
-			lore.add(TextUtils.colorize(line));
+            lore.add(TextUtils.colorize(line));
 
-		}
+        }
 
-		meta.setLore(lore);
-		base.setItemMeta(meta);
+        meta.setLore(lore);
+        base.setItemMeta(meta);
 
-		return base;
+        return base;
 
-	}
+    }
 }
